@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Berita{
+  id                Int             @id @default(autoincrement())
+  nama              String  
+  lengkap           Lengkap?
+}
+
+model Lengkap{
+  berita            Berita          @relation(fields: [idBerita], references: [id])
+  idBerita          Int             @id
+  fotoBerita        String?
+  deskripsiBerita   String?
+}
+
+model Wisata{
+  id                Int             @id @default(autoincrement())
+  fotoWisata        String
+  namaWisata        String
+  lokasiWisata      String
+}
